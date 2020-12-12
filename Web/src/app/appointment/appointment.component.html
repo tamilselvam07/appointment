@@ -1,0 +1,52 @@
+<mat-card class="matcard-custom">
+
+  <div class="main-content">
+    <h3 class="card-title">Appoinment</h3>
+    <div class="card-header card-header-success" fxLayout="row" fxLayoutAlign="start start" fxLayout.gt-sm="row"
+      fxLayoutAlign.gt-sm="space-between">
+      <div class="card-body" fxLayout="row" fxLayoutAlign="start start">
+        <mat-calendar #calendar [(selected)]="selectedDate" (selectedChange)="dateChanged($event)">
+        </mat-calendar>
+      </div>
+      <div fxLayout="column" class="card-body p-2" fxLayoutAlign="start start" fxFlex="84">
+        <div fxLayout="row" fxLayoutAlign="start start" style="width: 100%;">
+          <div fxLayout="column" fxLayoutAlign="start start" fxFlex="90">
+            <h3 class="card-title" style="margin: 0;">Morning</h3>
+            <h5 class="card-title">9.00 AM to 12.00 PM</h5>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="end end">
+            <a (click)="addSlots($event, 'morning')"><b>+ Add Slots</b></a>
+          </div>
+        </div>
+        <br>
+        <mat-chip-list class="Fish selection" aria-label="Color selection">
+          <mat-chip *ngFor="let item of appointments" selected (click)="updateSlot(item)"
+            [color]="(item.status === 'BOOKED') ? 'primary': 'null' ">
+            {{item.startTime | date:'hh:mm a'}} 
+          </mat-chip>
+        </mat-chip-list>
+        <div fxLayout="column" fxLayoutAlign="start start" style="margin: 8% 0;">
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start" style="width: 100%;">
+          <div fxLayout="column" fxLayoutAlign="start start" fxFlex="90">
+            <h3 class="card-title" style="margin: 0;">Evening</h3>
+            <h5 class="card-title">5.00 PM to 9.00 PM</h5>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="end end">
+            <a (click)="addSlots($event, 'evening')"><b>+ Add Slots</b></a>
+          </div>
+        </div>
+        <br>
+        <mat-chip-list class="Fish selection" aria-label="Color selection">
+          <mat-chip *ngFor="let item of appointmentsEve" selected
+            [color]="(item.status === 'BOOKED') ? 'primary': 'null' "  (click)="updateSlot(item)">
+            {{item.startTime | date:'hh:mm a'}}
+          </mat-chip>
+        </mat-chip-list>
+
+      </div>
+
+    </div>
+
+  </div>
+</mat-card>

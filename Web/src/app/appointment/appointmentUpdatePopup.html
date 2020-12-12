@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Book Appointment</h1>
+<div mat-dialog-content style="width: auto;padding:2 rem">
+    <div class="p-12" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" style="margin-bottom: 15px;">
+            <mat-form-field appearance="outline" style="padding-right: 2rem;" fxFlex="50">
+                <mat-label>Patient Name</mat-label>
+                <input type="text" matInput [(ngModel)]="name" [ngModelOptions]="{standalone: true}"  required />
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="padding-right: 2rem;" fxFlex="50">
+                <mat-label>Contact Number</mat-label>
+                <input type="number" matInput [(ngModel)]="contactNumber" [ngModelOptions]="{standalone: true}" required />
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" style="margin-bottom: 15px;">
+            <mat-form-field appearance="outline" style="padding-right: 2rem;" fxFlex="100">
+                <mat-label>Description</mat-label>
+                <input type="text" matInput [(ngModel)]="description" [ngModelOptions]="{standalone: true}"  />
+            </mat-form-field> 
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            &nbsp;&nbsp;
+            <button mat-raised-button color="success" [disabled]="!name || !contactNumber"
+                (click)="submit()">Submit</button>
+            &nbsp;&nbsp;
+            <button mat-raised-button style="background-color: #DCDCDC" (click)="matDialogRef.close()">Cancel</button>
+        </div>
+        <br>
+    </div>
+
+</div>

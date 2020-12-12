@@ -1,0 +1,45 @@
+<h1 mat-dialog-title>Add Slots</h1>
+<div mat-dialog-content style="width: auto;padding:2 rem">
+    <div class="p-12" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" style="margin-bottom: 15px;">
+            <mat-form-field appearance="outline" style="padding-right: 2rem;" fxFlex="33">
+                <mat-label>Date</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="date" [min]="minSlotDate" required
+                    [ngModelOptions]="{standalone: true}" />
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" style="padding-right: 2rem;" fxFlex="33">
+                <mat-label i18n="Timepicker 1 Title">From</mat-label>
+                <input matTimepicker #t1="matTimepicker" i18n-okLabel="Timepicker 1 Ok Label" okLabel="Ok"
+                    i18n-cancelLabel="Timepicker 1 Cancel Label" cancelLabel="Cancel" [minDate]="minValue"
+                    [maxDate]="maxValue" id="timepicker-example-1" mode="24h" placeholder="Please select time..."
+                    name="time-1" required (timeChange)="timeChangeHandler($event, 'from')">
+                <mat-icon matSuffix (click)="t1.showDialog()">access_time</mat-icon>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" style="padding-right: 2rem;" fxFlex="33">
+                <mat-label i18n="Timepicker 2 Title">To</mat-label>
+                <input matTimepicker #t2="matTimepicker" i18n-okLabel="Timepicker 2 Ok Label" okLabel="Ok"
+                    i18n-cancelLabel="Timepicker 2 Cancel Label" cancelLabel="Cancel" [minDate]="minValueTo"
+                    [maxDate]="maxValueTo" id="timepicker-example-2" mode="24h" placeholder="Please select time..."
+                    name="time-2" required (timeChange)="timeChangeHandler($event, 'to')">
+                <mat-icon matSuffix (click)="t2.showDialog()">access_time</mat-icon>
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+            <p>Note : Slot duration is 30 min will be take for default calculation</p>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            &nbsp;&nbsp;
+            <button mat-raised-button color="success" [disabled]="!date || !startTime  || !endTime"
+                (click)="submit()">Submit</button>
+            &nbsp;&nbsp;
+            <button mat-raised-button style="background-color: #DCDCDC" (click)="matDialogRef.close()">Cancel</button>
+        </div>
+        <br>
+    </div>
+
+</div>
