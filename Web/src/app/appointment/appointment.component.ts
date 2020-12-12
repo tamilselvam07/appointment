@@ -23,10 +23,10 @@ export class AppointmentComponent implements OnInit {
     this.appointmentService.getAppointment(this.selectedDate).then((result) => {
       try {
         this.appointments = result.filter((item: any) => {
-          return new Date(item.startTime).getTime() < new Date().setHours(12, 0, 0, 0);
+          return new Date(item.startTime).getTime() < new Date(new Date(item.startTime).getFullYear(), new Date(item.startTime).getMonth(), new Date(item.startTime).getDate()).setHours(12, 0, 0, 0);
         });
         this.appointmentsEve = result.filter((item: any) => {
-          return new Date(item.startTime).getTime() > new Date().setHours(12, 0, 0, 0);
+          return new Date(item.startTime).getTime() > new Date(new Date(item.startTime).getFullYear(), new Date(item.startTime).getMonth(), new Date(item.startTime).getDate()).setHours(12, 0, 0, 0);
         });
       } catch (err) { }
     }).catch((error) => {
@@ -58,7 +58,7 @@ export class AppointmentComponent implements OnInit {
       }
     });
   }
-  updateSlot(data){
+  updateSlot(data) {
     const dialogRef = this.dialog.open(AppointmentUpdatePopup, {
       data: data,
     });
@@ -101,25 +101,25 @@ export class AppointmentPopup implements OnInit {
 
   }
 
-  
+
   ngOnInit(): void {
-   
+
   }
 
   ngAfterViewInit() {
-    setTimeout(()=>{
-      
-    if (this.data === 'morning') {
-      this.minValue = new Date(new Date().setHours(9, 0, 0, 0));
-      this.maxValue = new Date(new Date().setHours(12, 0, 0, 0));
-    }
-    else {
-      this.minValue = new Date(new Date().setHours(17, 0, 0, 0));
-      this.maxValue = new Date(new Date().setHours(21, 0, 0, 0));
-    }
-    this.minValueTo = this.minValue;
-    this.maxValueTo = this.maxValue;
-  }, 100)
+    setTimeout(() => {
+
+      if (this.data === 'morning') {
+        this.minValue = new Date(new Date().setHours(9, 0, 0, 0));
+        this.maxValue = new Date(new Date().setHours(12, 0, 0, 0));
+      }
+      else {
+        this.minValue = new Date(new Date().setHours(17, 0, 0, 0));
+        this.maxValue = new Date(new Date().setHours(21, 0, 0, 0));
+      }
+      this.minValueTo = this.minValue;
+      this.maxValueTo = this.maxValue;
+    }, 100)
   }
   timeChangeHandler(e, type) {
     if (type === 'from') {
@@ -174,8 +174,8 @@ export class AppointmentUpdatePopup {
   constructor(
     public matDialogRef: MatDialogRef<AppointmentUpdatePopup>,
     @Inject(MAT_DIALOG_DATA) private data: any, private appointmentService: AppointmentService, private matSnackBar: MatSnackBar) {
-      this._id = this.data._id;
-     
+    this._id = this.data._id;
+
   }
 
   submit() {
